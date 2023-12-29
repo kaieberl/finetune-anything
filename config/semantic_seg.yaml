@@ -8,18 +8,19 @@ train:
       # Fix the a part of parameters in SAM
       fix_img_en: True
       fix_prompt_en: True
-      fix_mask_de: False
+      fix_mask_de: False  # only train the mask decoder
       ckpt_path: 'sam_ckpt/sam_vit_b_01ec64.pth'
-      class_num: 21 # 20 + 1
+      class_num: 8
       model_type: 'vit_b'    # type should be in [vit_h, vit_b, vit_l, default]
 
   # Dataset
   dataset:
-    name: 'torch_voc_sem'
+    name: 'oem_sem'
     params:
-      root: '/data/jinziqi/DATASETS/'
-      year: '2012'
-      image_set: 'train'
+      dataset_dir: '/finetune-anything/OpenEarthMap_Mini/'
+      metainfo:
+        class_names: ['bareland', 'rangeland', 'developed_space', 'road', 'tree', 'water', 'agriculture_land', 'building']
+        image_set: 'train'
     transforms:
       resize:
         params:
@@ -68,11 +69,12 @@ train:
 val:
   # Dataset
   dataset:
-    name: 'torch_voc_sem'
+    name: 'oem_sem'
     params:
-      root: '/data/jinziqi/DATASETS/'
-      year: '2012'
-      image_set: 'train'
+      dataset_dir: '/finetune-anything/OpenEarthMap_Mini/'
+      metainfo:
+        class_names: [ 'bareland', 'rangeland', 'developed_space', 'road', 'tree', 'water', 'agriculture_land', 'building' ]
+        image_set: 'val'
     transforms:
       resize:
         params:

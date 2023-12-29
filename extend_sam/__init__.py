@@ -12,11 +12,13 @@ AVAI_MODEL = {'base_sam': BaseExtendSam, 'sem_sam': SemanticSam}
 AVAI_OPT = {'sgd': torch.optim.SGD, 'adam': torch.optim.Adam, 'adamw': torch.optim.AdamW}
 AVAI_RUNNER = {'base_runner': BaseRunner, 'sem_runner': SemRunner}
 
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
 
 def get_model(model_name, **kwargs):
     if model_name not in AVAI_MODEL:
         print('not supported model name, please implement it first.')
-    return AVAI_MODEL[model_name](**kwargs).cuda()
+    return AVAI_MODEL[model_name](**kwargs).to(device)
 
 
 def get_optimizer(opt_name, **kwargs):

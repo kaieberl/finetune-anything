@@ -7,6 +7,8 @@ import torch.nn.functional as F
 import os
 import torch.nn as nn
 
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
 
 class BaseRunner():
     def __init__(self, model, optimizer, losses, train_loader, val_loader, scheduler):
@@ -53,7 +55,7 @@ class SemRunner(BaseRunner):
         # train
         for iteration in range(cfg.max_iter):
             images, labels = train_iterator.get()
-            images, labels = images.cuda(), labels.cuda().long()
+            images, labels = images.to(device), labels.to(device).long()
             masks_pred, iou_pred = self.model(images)
             masks_pred = F.interpolate(masks_pred, self.original_size, mode="bilinear", align_corners=False)
 

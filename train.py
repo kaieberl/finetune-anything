@@ -33,7 +33,7 @@ if __name__ == '__main__':
     val_loader = DataLoader(val_dataset, batch_size=val_cfg.bs, shuffle=False, num_workers=val_cfg.num_workers,
                             drop_last=val_cfg.drop_last)
     losses = get_losses(losses=train_cfg.losses)
-    # according the model name to get the adapted model
+    # corresponding model name to get the adapted model
     model = get_model(model_name=train_cfg.model.sam_name, **train_cfg.model.params)
     opt_params = get_opt_pamams(model, lr_list=train_cfg.opt_params.lr_list, group_keys=train_cfg.opt_params.group_keys,
                                 wd_list=train_cfg.opt_params.wd_list)

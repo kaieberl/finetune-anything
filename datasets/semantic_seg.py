@@ -74,7 +74,7 @@ class BaseSemanticDataset(VisionDataset):
 
 
 class VOCSemanticDataset(Dataset):
-    def __init__(self, root_dir, domain, transform, with_id=False, with_mask=False):
+    def __init__(self, root_dir, domain, transform=None, with_id=False, with_mask=False):
         super(VOCSemanticDataset, self).__init__()
         self.root_dir = root_dir
 
